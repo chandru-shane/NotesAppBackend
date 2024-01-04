@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  # Django web application
+  web:
+    image: notesbackend:latest  # Replace with the name/tag of your Django Docker image
+    container_name: notesbackend-api
+    command: python src/manage.py runserver 0.0.0.0:8000
+    # volumes:
+    #   - ./path/to/your/django/app:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: dev_notesapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+
