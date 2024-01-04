@@ -1,6 +1,6 @@
 # Tools used
 <li>Progmming language: Python</li>
-<li>Backend web framework: Django and Djangorestframework</li>
+<li>Backend web framework: Django and Django Rest Framework</li>
 <li>Database: Postgres</li>
 <li>Testing: pytest</li>
 <li>Devops: Docker and Docker compose </li>
