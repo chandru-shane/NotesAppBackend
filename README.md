@@ -2,3 +2,6 @@
 ### 1. docker build -t notesbackend .
 ### 2. docker-compose up
 ### 3. docker exec -it notesbackend-api  python src/manage.py migrate
+
+## to run the tests
+### docker exec -it notesbackend-api pytest src
