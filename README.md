@@ -1,9 +1,9 @@
 # Tools used
-Progmming language: Python </br>
-Backend web framework: Django and Djangorestframework </br>
-Database: Postgres </br>
-Testing: pytest </br>
-Devops: Docker and Docker compose </br>
+<li>Progmming language: Python</li>
+<li>Backend web framework: Django and Djangorestframework</li>
+<li>Database: Postgres</li>
+<li>Testing: pytest</li>
+<li>Devops: Docker and Docker compose </li>
 
 
 # steps to run the application
