@@ -83,8 +83,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME":"dev_notesapp",
         "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "db",
+        "PASSWORD": "chan",
+        "HOST": "localhost",
         "PORT": "5432",
         "ATOMIC_REQUESTS": True,
         "TEST": {},
@@ -143,6 +143,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
          'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/day',
+        'user': '10/day'
+    }
 }
 
 APPEND_SLASH=False

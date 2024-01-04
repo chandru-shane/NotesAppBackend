@@ -37,3 +37,20 @@ def test_login_view():
     response = client.post(reverse("LOGIN"), {"username_or_email": "testuser1@example.com", "password": "estuser1"})
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert not response.data.get("token", False)
+
+
+@pytest.mark.django_db
+def test_throttle():
+    client = APIClient()
+    # invalid email is used request should return 400
+    response = client.post(
+        reverse("SIGNUP"), {"email": "testuser1@.com", "username": "testuser1", "password": "testuser1"}
+    )
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert User.objects.count() == 0
+
+    response = client.post(
+        reverse("SIGNUP"), {"email": "testuser1@example.com", "username": "testuser1", "password": "testuser1"}
+    )
+    assert response.status_code == status.HTTP_429_TOO_MANY_REQUESTS
+    assert User.objects.count() == 0

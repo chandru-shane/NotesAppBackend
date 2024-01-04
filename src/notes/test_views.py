@@ -121,3 +121,22 @@ def test_note_search_api_view_unauthenticated_user():
     response = client.get(reverse("SEARCH_API_VIEW"), {"q": "Test"})
     
     assert response.status_code == status.HTTP_403_FORBIDDEN
+
+
+@pytest.mark.django_db
+def test_throttle():
+    user = User.objects.create(username="testuser", email="testuser@example.com", password="testpassword")
+    client = APIClient()
+    client.force_authenticate(user=user)
+
+    # Create a note for the user
+    note = Note.objects.create(title="Test Note", content="Test Content", owner=user)
+   
+
+    for _ in range(10):
+        response = client.get(reverse("SEARCH_API_VIEW"), {"q": "Test"})
+        assert response.status_code == status.HTTP_200_OK
+    
+    response = client.get(reverse("SEARCH_API_VIEW"), {"q": "Test"})
+    assert response.status_code == status.HTTP_429_TOO_MANY_REQUESTS
+    
