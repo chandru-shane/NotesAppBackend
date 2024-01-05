@@ -133,7 +133,7 @@ def test_throttle():
     note = Note.objects.create(title="Test Note", content="Test Content", owner=user)
    
 
-    for _ in range(10):
+    for _ in range(1000):
         response = client.get(reverse("SEARCH_API_VIEW"), {"q": "Test"})
         assert response.status_code == status.HTTP_200_OK
     
